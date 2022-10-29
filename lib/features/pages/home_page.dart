@@ -100,6 +100,7 @@ class SearchWidget extends StatelessWidget {
               ),
             ),
             ElevatedButton(
+                //przekazujemy naszą metodę z cubita
                 onPressed: () {
                   context
                       .read<ExchangeCubit>()
