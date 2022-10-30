@@ -33,21 +33,34 @@ class HomePage extends StatelessWidget {
           return Scaffold(
             //pierwszego returna wrapujemy w builder zeby wypisać warunki
             appBar: AppBar(title: const Text('Currency Exchange')),
-            body: Builder(builder: (context) {
-              //posługujemy się zmiennymi ze state
-              if (state.status == Status.loading) {
-                return const Center(
-                    child: CircularProgressIndicator(
-                  color: Colors.green,
-                ));
-              }
-              if (exchangeModel == null) {
-                return SearchWidget();
-              }
-              return ExchangeWidget(
-                exchangeModel: exchangeModel,
-              );
-            }),
+            body: Center(
+              child: Builder(builder: (context) {
+                //posługujemy się zmiennymi ze state
+                if (state.status == Status.loading) {
+                  return const Center(
+                      child: CircularProgressIndicator(
+                    color: Colors.green,
+                  ));
+                }
+                if (exchangeModel == null) {
+                  return Scaffold(
+                    body: SearchWidget(),
+                  );
+                } else {
+                  return Scaffold(
+                    body: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ExchangeWidget(exchangeModel: exchangeModel),
+                          SearchWidget(),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+              }),
+            ),
           );
         },
       ),
@@ -66,11 +79,27 @@ class ExchangeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ExchangeCubit, ExchangeState>(
       builder: (context, state) {
-        return Scaffold(
-          body: Column(
+        return Center(
+          child: Column(
             children: [
-              Text(exchangeModel.from,
-                  style: Theme.of(context).textTheme.headline1),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(exchangeModel.from,
+                      style: Theme.of(context).textTheme.headline2),
+                  const SizedBox(
+                    width: 20.0,
+                  ),
+                  Text('to', style: Theme.of(context).textTheme.headline5),
+                  const SizedBox(
+                    width: 20.0,
+                  ),
+                  Text(
+                    exchangeModel.to,
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                ],
+              ),
               Text(
                 exchangeModel.result.toString(),
                 style: Theme.of(context).textTheme.headline2,
@@ -88,27 +117,45 @@ class SearchWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
   final _fromcontroller = TextEditingController();
+  final _tocontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Row(
           children: [
             Expanded(
-              child: TextField(
-                controller: _fromcontroller,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text('Currency'),
-                    hintText: 'EUR'),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextField(
+                  controller: _fromcontroller,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: Text('From'),
+                      hintText: 'EUR'),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextField(
+                  controller: _tocontroller,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: Text('To'),
+                      hintText: 'PLN'),
+                ),
               ),
             ),
             ElevatedButton(
                 //przekazujemy naszą metodę z cubita
                 onPressed: () {
-                  context
-                      .read<ExchangeCubit>()
-                      .getExchangeRate(from: _fromcontroller.text);
+                  context.read<ExchangeCubit>().getExchangeRate(
+                        from: _fromcontroller.text,
+                        to: _tocontroller.text,
+                      );
                 },
                 child: const Text('Get')),
           ],

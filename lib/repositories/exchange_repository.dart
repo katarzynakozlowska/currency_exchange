@@ -5,8 +5,12 @@ class ExchangeRepository {
   ExchangeRepository(this._exchangeDataSource);
   final ExchangeDataSource _exchangeDataSource;
 
-  Future<ExchangeModel?> getExchangeModel({required String from}) async {
-    final json = await _exchangeDataSource.getExchangData(from: from);
+  Future<ExchangeModel?> getExchangeModel(
+      {required String from, required String to}) async {
+    final json = await _exchangeDataSource.getExchangData(
+      from: from,
+      to: to,
+    );
     if (json == null) {
       return null;
     }
