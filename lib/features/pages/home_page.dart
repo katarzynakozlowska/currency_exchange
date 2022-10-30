@@ -1,4 +1,5 @@
 import 'package:currency_exchange/core/enums.dart';
+import 'package:currency_exchange/data_source/remote_data_source.dart';
 import 'package:currency_exchange/features/cubit/exchange_cubit.dart';
 import 'package:currency_exchange/models/exchange_model.dart';
 import 'package:currency_exchange/repositories/exchange_repository.dart';
@@ -14,7 +15,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ExchangeCubit(ExchangeRepository()),
+      create: (context) =>
+          ExchangeCubit(ExchangeRepository(ExchangeDataSource())),
       child: BlocListener<ExchangeCubit, ExchangeState>(
         listener: (context, state) {
           if (state.status == Status.error) {
