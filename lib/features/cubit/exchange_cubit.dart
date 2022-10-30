@@ -16,13 +16,16 @@ class ExchangeCubit extends Cubit<ExchangeState> {
   Future<void> getExchangeRate({
     //zmienne, które wprowadza uytkownik
     required String from,
+    required String to,
   }) async {
     emit(const ExchangeState(status: Status.loading));
     //na początku zawsze status loading
     try {
       //tworzymy nową zmienną, która dostarczy nam dane z repository
-      final exchangeModel =
-          await _exchangeRepository.getExchangeModel(from: from);
+      final exchangeModel = await _exchangeRepository.getExchangeModel(
+        from: from,
+        to: to,
+      );
       emit(ExchangeState(
         //przypisujemy zmiennej ze state naszą nową zmienną
         model: exchangeModel,
