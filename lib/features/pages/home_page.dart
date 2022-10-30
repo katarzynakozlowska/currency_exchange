@@ -64,17 +64,21 @@ class ExchangeWidget extends StatelessWidget {
   final ExchangeModel exchangeModel;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Text(exchangeModel.from,
-              style: Theme.of(context).textTheme.headline1),
-          Text(
-            exchangeModel.result.toString(),
-            style: Theme.of(context).textTheme.headline2,
+    return BlocBuilder<ExchangeCubit, ExchangeState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: Column(
+            children: [
+              Text(exchangeModel.from,
+                  style: Theme.of(context).textTheme.headline1),
+              Text(
+                exchangeModel.result.toString(),
+                style: Theme.of(context).textTheme.headline2,
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
