@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           ExchangeCubit(ExchangeRepository(ExchangeDataSource())),
-      child: BlocListener<ExchangeCubit, ExchangeState>(
+      child: BlocConsumer<ExchangeCubit, ExchangeState>(
         listener: (context, state) {
           if (state.status == Status.error) {
             final errorMessage = state.errorMessage ?? 'Unknown error';
@@ -27,31 +27,29 @@ class HomePage extends StatelessWidget {
             ));
           }
         },
-        child: BlocBuilder<ExchangeCubit, ExchangeState>(
-          builder: (context, state) {
-            //tworzymy nową zmienną i przekazujemy nasz model ze state
-            final exchangeModel = state.model;
-            return Scaffold(
-              //pierwszego returna wrapujemy w builder zeby wypisać warunki
-              appBar: AppBar(title: const Text('Currency Exchange')),
-              body: Builder(builder: (context) {
-                //posługujemy się zmiennymi ze state
-                if (state.status == Status.loading) {
-                  return const Center(
-                      child: CircularProgressIndicator(
-                    color: Colors.green,
-                  ));
-                }
-                if (exchangeModel == null) {
-                  return SearchWidget();
-                }
-                return ExchangeWidget(
-                  exchangeModel: exchangeModel,
-                );
-              }),
-            );
-          },
-        ),
+        builder: (context, state) {
+          //tworzymy nową zmienną i przekazujemy nasz model ze state
+          final exchangeModel = state.model;
+          return Scaffold(
+            //pierwszego returna wrapujemy w builder zeby wypisać warunki
+            appBar: AppBar(title: const Text('Currency Exchange')),
+            body: Builder(builder: (context) {
+              //posługujemy się zmiennymi ze state
+              if (state.status == Status.loading) {
+                return const Center(
+                    child: CircularProgressIndicator(
+                  color: Colors.green,
+                ));
+              }
+              if (exchangeModel == null) {
+                return SearchWidget();
+              }
+              return ExchangeWidget(
+                exchangeModel: exchangeModel,
+              );
+            }),
+          );
+        },
       ),
     );
   }
