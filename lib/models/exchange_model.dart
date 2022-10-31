@@ -1,12 +1,21 @@
-class ExchangeModel {
-  ExchangeModel({required this.from, required this.to,required this.result});
-  //wszystkie zmienne, które są wprowadzane i dostarczane z bazy
-  final String from;
-  final String to;
-  final double result;
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'exchange_model.g.dart';
+part 'exchange_model.freezed.dart';
 
-  ExchangeModel.fromJson(Map<String, dynamic> json)
-      : from = json['base_code'],
-      to=json['target_code'],
-        result = json['conversion_rate'] + 0.0;
+@freezed
+class ExchangeModel with _$ExchangeModel {
+  @JsonSerializable(explicitToJson: true)
+  factory ExchangeModel(
+    @JsonKey(name: 'base_code') String from,
+    @JsonKey(name: 'target_code') String to,
+    @JsonKey(name: 'conversion_rate') double result,
+  ) = _ExchangeModel;
+
+  factory ExchangeModel.fromJson(Map<String, dynamic> json) =>
+      _$ExchangeModelFromJson(json);
 }
+
+//Za kazdym razem jak robimy jakąś zmianę to musimy w terminalu wpisać flutter pub run build_runner build
+
+//dependencies: freezed_annotation
+//dev dependencies: freezed i build runner, który juz mamy

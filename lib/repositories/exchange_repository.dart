@@ -16,5 +16,6 @@ class ExchangeRepository {
     }
 
     return ExchangeModel.fromJson(json);
+    //nasze zmienne z rest api znajdują się w modelu
   }
 }
