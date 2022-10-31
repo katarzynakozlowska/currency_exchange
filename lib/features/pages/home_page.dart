@@ -3,6 +3,7 @@ import 'package:currency_exchange/data_source/remote_data_source.dart';
 import 'package:currency_exchange/features/cubit/exchange_cubit.dart';
 import 'package:currency_exchange/models/exchange_model.dart';
 import 'package:currency_exchange/repositories/exchange_repository.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          ExchangeCubit(ExchangeRepository(ExchangeDataSource())),
+          ExchangeCubit(ExchangeRepository(ExchangeRetrofitDataSource(Dio()))),
       child: BlocConsumer<ExchangeCubit, ExchangeState>(
         listener: (context, state) {
           if (state.status == Status.error) {
