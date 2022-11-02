@@ -1,11 +1,13 @@
 part of 'exchange_cubit.dart';
 
-@immutable
-//w stejcie wywołujemy nową zmienną dla modelu, dla enuma i error, nie dajemy required
-class ExchangeState {
-  const ExchangeState(
-      {this.model, this.status = Status.initial, this.errorMessage});
-  final ExchangeModel? model;
-  final Status status;
-  final String? errorMessage;
+//w cubicie  w importach wpisujemy...  part 'exchange_cubit.freezed.dart';
+
+@freezed
+class ExchangeState with _$ExchangeState {
+  ExchangeState._();
+  factory ExchangeState({
+     ExchangeModel? model,
+    @Default(Status.initial) Status? status,
+    @Default('') String? errorMessage,
+  }) = _ExchangeState;
 }

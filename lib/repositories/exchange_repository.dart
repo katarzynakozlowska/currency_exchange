@@ -12,6 +12,6 @@ class ExchangeRepository {
       to,
     );
 
-   //teraz mozemy sobie zrobić returna zamiast awaitować na dane
+    //teraz mozemy sobie zrobić returna zamiast awaitować na dane
   }
 }
