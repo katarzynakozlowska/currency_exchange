@@ -17,8 +17,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ExchangeCubit(
-          exchangeRepository:
-              ExchangeRepository(ExchangeRetrofitDataSource(Dio()))),
+          exchangeRepository: ExchangeRepository(
+        exchangeDataSource: ExchangeRetrofitDataSource(Dio()),
+      )),
       child: BlocConsumer<ExchangeCubit, ExchangeState>(
         listener: (context, state) {
           if (state.status == Status.error) {

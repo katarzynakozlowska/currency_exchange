@@ -13,7 +13,7 @@ void main() {
 
   setUp(() {
     dataSource = MockExchangeDataSource();
-    sut = ExchangeRepository(dataSource);
+    sut = ExchangeRepository(exchangeDataSource:dataSource);
   });
   //w group description wpisujemy nazwę metody, którą testujemy
 

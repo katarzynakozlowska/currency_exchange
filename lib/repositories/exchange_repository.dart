@@ -2,7 +2,7 @@ import 'package:currency_exchange/data_source/remote_data_source.dart';
 import 'package:currency_exchange/models/exchange_model.dart';
 
 class ExchangeRepository {
-  ExchangeRepository(this.exchangeDataSource);
+  ExchangeRepository({required this.exchangeDataSource});
   final ExchangeRetrofitDataSource exchangeDataSource;
 
   Future<ExchangeModel?> getExchangeModel(
