@@ -9,25 +9,21 @@ part 'exchange_state.dart';
 part 'exchange_cubit.freezed.dart';
 
 class ExchangeCubit extends Cubit<ExchangeState> {
-  ExchangeCubit({required this.exchangeRepository}) : super( ExchangeState());
+  ExchangeCubit({required this.exchangeRepository}) : super(ExchangeState());
   final ExchangeRepository exchangeRepository;
-  //przekazujemy nasze repository
 
   Future<void> getExchangeRate({
-    //zmienne, które wprowadza uytkownik
     required String from,
     required String to,
   }) async {
-    emit( ExchangeState(status: Status.loading));
-    //na początku zawsze status loading
+    emit(ExchangeState(status: Status.loading));
+
     try {
-      //tworzymy nową zmienną, która dostarczy nam dane z repository
       final exchangeModel = await exchangeRepository.getExchangeModel(
         from: from,
         to: to,
       );
       emit(ExchangeState(
-        //przypisujemy zmiennej ze state naszą nową zmienną
         model: exchangeModel,
         status: Status.success,
       ));

@@ -11,8 +11,7 @@ class HomePage extends StatelessWidget {
   const HomePage({
     Key? key,
   }) : super(key: key);
-//Scaffold wrapujemy w blocbuilder i blocprovider
-//BlocBuilder wrapujemy w listener
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -31,14 +30,14 @@ class HomePage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          //tworzymy nową zmienną i przekazujemy nasz model ze state
+         
           final exchangeModel = state.model;
           return Scaffold(
-            //pierwszego returna wrapujemy w builder zeby wypisać warunki
+          
             appBar: AppBar(title: const Text('Currency Exchange')),
             body: Center(
               child: Builder(builder: (context) {
-                //posługujemy się zmiennymi ze state
+            
                 if (state.status == Status.loading) {
                   return const Center(
                       child: CircularProgressIndicator(
@@ -76,7 +75,7 @@ class ExchangeWidget extends StatelessWidget {
     Key? key,
     required this.exchangeModel,
   }) : super(key: key);
-  //musimy stworzyć nową zmienną, która dostarczy nasz model
+
   final ExchangeModel exchangeModel;
   @override
   Widget build(BuildContext context) {
@@ -153,7 +152,7 @@ class SearchWidget extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-                //przekazujemy naszą metodę z cubita
+              
                 onPressed: () {
                   context.read<ExchangeCubit>().getExchangeRate(
                         from: _fromcontroller.text,
