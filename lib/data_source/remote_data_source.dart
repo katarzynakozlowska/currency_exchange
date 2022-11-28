@@ -10,14 +10,12 @@ abstract class ExchangeRetrofitDataSource {
       _ExchangeRetrofitDataSource;
 
   @GET("/pair/{from}/{to}")
-  //normalnie jak nie ma parametru to bez tych klamerek
   Future<ExchangeModel> getExchangeData(
-    //linijka z path jest potzrebna tylko jak przekazujemy parametr z UI jak from i to
+    
       @Path("from") String from, @Path("to") String to,);
 }
 
 //class ExchangeDataSource {
-  //wszystkie dane, które wprowadza uytkownik--> from
   //Future<Map<String, dynamic>?> getExchangData(
      // {required String from, required String to}) async {
    // try {

@@ -15,7 +15,4 @@ class ExchangeModel with _$ExchangeModel {
       _$ExchangeModelFromJson(json);
 }
 
-//Za kazdym razem jak robimy jakąś zmianę to musimy w terminalu wpisać flutter pub run build_runner build
 
-//dependencies: freezed_annotation
-//dev dependencies: freezed i build runner, który juz mamy
