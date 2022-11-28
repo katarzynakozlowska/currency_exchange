@@ -16,8 +16,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ExchangeCubit(ExchangeRepository(ExchangeRetrofitDataSource(Dio()))),
+      create: (context) => ExchangeCubit(
+          exchangeRepository: ExchangeRepository(
+        exchangeDataSource: ExchangeRetrofitDataSource(Dio()),
+      )),
       child: BlocConsumer<ExchangeCubit, ExchangeState>(
         listener: (context, state) {
           if (state.status == Status.error) {
@@ -87,23 +89,23 @@ class ExchangeWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(exchangeModel.from,
-                      style: Theme.of(context).textTheme.headline2),
+                      style: Theme.of(context).textTheme.headlineMedium),
                   const SizedBox(
                     width: 20.0,
                   ),
-                  Text('to', style: Theme.of(context).textTheme.headline5),
+                  Text('to', style: Theme.of(context).textTheme.headlineMedium),
                   const SizedBox(
                     width: 20.0,
                   ),
                   Text(
                     exchangeModel.to,
-                    style: Theme.of(context).textTheme.headline2,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ],
               ),
               Text(
                 exchangeModel.result.toString(),
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.headlineLarge,
               ),
             ],
           ),
