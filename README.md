@@ -1,16 +1,5 @@
 # currency_exchange
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Mobile application providing the latest currency exchange rates. Based on free currency exchange Rest Api. 
+The app can be used to convert between two specific currencies.
+You can simply input the base and target currency and you'll be provided with the real time data of the currency exchange rate.
